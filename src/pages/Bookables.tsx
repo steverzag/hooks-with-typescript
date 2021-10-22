@@ -1,9 +1,11 @@
+import BookablesList from "../components/BookablesList"
 
-const Bookables: React.FC = () => (
-
+const Bookables = () => (
     <main>
-        <p>Bookables!</p>
+        <BookablesList/>
     </main>
 )
+    
+
 
 export default Bookables

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Bookables from "../pages/Bookables";
 import Bookings from "../pages/Bookings";
 import Users from "../pages/Users";
