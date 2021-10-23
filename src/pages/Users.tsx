@@ -1,8 +1,9 @@
+import UserList from "../components/UsersList"
 
 const Users: React.FC = () => (
 
     <main>
-        <p>Users!</p>
+        <UserList/>
     </main>
 )
 
