@@ -1,5 +1,5 @@
 //import {bookables} from './static-data.json'
-export type Room = {
+export type Bookable = {
     id: number,
     group: string,
     title: string,
@@ -7,7 +7,7 @@ export type Room = {
     sessions: number[],
     days: number[]
 }
-export const getRooms = async(): Promise<Room[]> => {
+export const getBookables = async(): Promise<Bookable[]> => {
 
     const endpoint = './static-data.json'
     const {bookables} = await (await fetch(endpoint, {
@@ -16,7 +16,7 @@ export const getRooms = async(): Promise<Room[]> => {
             'Accept': 'application/json'
         }
     })).json()
-    
+
     console.log(bookables)
-    return bookables.filter((room: Room) => room.group === "Rooms");
+    return bookables;
 }

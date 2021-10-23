@@ -31,6 +31,22 @@
             "notes": "Tables, Dishes, Spoons, chairs, glasses",
             "sessions": [0, 2, 4],
             "days": [0, 2, 3, 4, 5, 6]
+        },
+        {
+            "id": 5,
+            "group": "Kit",
+            "title": "Projector",
+            "notes": "Portable but powrfull, keep it with the case.Be careful, it gets quite hot after a while",
+            "sessions": [0, 2, 4],
+            "days": [ 4, 5, 6]
+        },
+        {
+            "id": 6,
+            "group": "Kit",
+            "title": "Wireless Microfone",
+            "notes": "wood",
+            "sessions": [0, 2, 4],
+            "days": [0, 2, 3, 4, 5, 6]
         }
 
     ],
@@ -41,6 +57,27 @@
             "img": "user1.png",
             "title": "Envisioning Sculptor",
             "notes": "With the company for 15 years, Mark has consistently…"
+        },
+        {
+            "id": 2,
+            "name": "Simon",
+            "img": "user2.png",
+            "title": "Developer",
+            "notes": "Divorced with two kids, they come with him often"
+        },
+        {
+            "id": 3,
+            "name": "Clarisse",
+            "img": "user3.png",
+            "title": "Police mayor",
+            "notes": "Nathing to say about this user"
+        },
+        {
+            "id": 4,
+            "name": "Sanjiv",
+            "img": "user4.png",
+            "title": "Airplane pilot",
+            "notes": "Subscribed last year"
         }
     ],
     "bookings": [],
