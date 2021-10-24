@@ -1,17 +1,35 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useReducer, useState } from "react";
 import { FaArrowRight, FaRegComments } from "react-icons/fa";
 import { Bookable, getBookables } from "../helpers/apicalls"
 import { bookables, sessions, days } from '../helpers/static-data.json'
+import reducer, { ActionKind } from "./bookablesListReducer";
+
+export type State = {
+    group: string,
+    selectedBookable: number,
+    hasDetails: boolean,
+    bookables: Bookable[]
+}
+
+const initialState: State = {
+    group: bookables[0].group,
+    selectedBookable: 0,
+    hasDetails: false,
+    bookables: bookables
+}
 
 const BookablesList = () => {
 
-    const [selectedBookable, setSelectedRoom] = useState(0)
-    let groups: string[] = bookables.map(value => value.group)
-    const [group, setGroup] = useState(groups[0])
-    const bookablesInGroup = bookables.filter(value => value.group === group)
+    //const [hasDetails, setDetails] = useState(false)
+    //const [selectedBookable, setSelectedBookable] = useState(0)
+    //const [group, setGroup] = useState(groups[0])
 
-    const [hasDetails, setDetails] = useState(false)
+    const [state, dispatch] = useReducer(reducer, initialState)
+    const {group, selectedBookable, hasDetails, bookables} = state
+    const bookablesInGroup = bookables.filter(value => value.group === group)
+    let groups: string[] = bookables.map(value => value.group)
     const bookable = bookablesInGroup[selectedBookable]
+
     console.log(selectedBookable)
     groups = groups.reduce((ack, value) => {
 
@@ -28,12 +46,14 @@ const BookablesList = () => {
     }, [] as string[])
     console.log(groups)
     function handleNext() {
-        setSelectedRoom(
-            (selectedBookable === bookables.length - 1) ? 0 : selectedBookable + 1
-        )
+        dispatch({type: ActionKind.NEXT_BOOKABLE})
+        //setSelectedBookable(
+        //    (selectedBookable === bookables.length - 1) ? 0 : selectedBookable + 1
+        //)
     }
     function changeBookable(index: number): void {
-        setSelectedRoom(index)
+        dispatch({type: ActionKind.SET_BOOKABLE, payload: index})
+        //setSelectedBookable(index)
     }
     function selectBook(index: number) {
         if (selectedBookable === index)
@@ -41,10 +61,15 @@ const BookablesList = () => {
         else
             return ""
     }
+    function handleChangeBookablesSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+        dispatch({type: ActionKind.SET_GROUP, payload: e.target.value})
+        //setSelectedBookable(0)
+        //setGroup(e.target.value)
+    }
     return (
         <Fragment>
             <div>
-                <select name="" id="" onChange={(e) => setGroup(e.target.value)}>
+                <select name="" id="" onChange={handleChangeBookablesSelect}>
                     {groups.map((group, index) => (
                         <option key={index} value={group}>{group}</option>
                     ))}
@@ -76,7 +101,7 @@ const BookablesList = () => {
                             <span>
                                 <label htmlFor="check-datails">Show details</label>
                                 <input type="checkbox" name="check-details" id="checkDetails"
-                                    onChange={(has) => setDetails(!hasDetails)} />
+                                    onChange={(has) => dispatch({type: ActionKind.TOGGLE_HASDETAILS})} />
                             </span>
                         </div>
                         <p>{bookable.notes}</p>
